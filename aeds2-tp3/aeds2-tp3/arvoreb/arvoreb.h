@@ -1,3 +1,11 @@
+//
+//  arvoreb.h
+//  aeds2-tp2
+//
+//  Created by  Bruno Marra (3029), Gustavo Viegas (3026) e Heitor Passeado (3055) on 10/04/18.
+//  Copyright © 2018 UFV Florestal. All rights reserved.
+//
+
 #include <stdlib.h>
 #include <stdio.h>
 

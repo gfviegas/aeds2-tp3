@@ -1,33 +1,26 @@
+//
+//  main.c
+//  aeds2-tp2
+//
+//  Created by  Bruno Marra (3029), Gustavo Viegas (3026) e Heitor Passeado (3055) on 10/04/18.
+//  Copyright © 2018 UFV Florestal. All rights reserved.
+//
+
 #include <stdlib.h>
 #include <stdio.h>
-#include "arvoreb/arvoreb.h"
+#include "file.h"
+
+#define FILE_NAME 20
 
 int main()
 {
-    TipoRegistro x;
+    char file[FILE_NAME];
+    printf("Digite o nome do arquivo: ");
+    scanf("%s", file);
+
     TipoPagina *Arvore;
     Inicializa(&Arvore);
-    printf("Chave: ");
-    scanf("%ld%*[^\n]", &x.Chave);
-    getchar();
-    while (x.Chave != 0)
-    {
-        Insere(x, &Arvore);
-        Imprime(Arvore);
-        printf("Chave: ");
-        scanf("%ld%*[^\n]", &x.Chave);
-        getchar();
-    }
-    printf("Chave: ");
-    scanf("%ld%*[^\n]", &x.Chave);
-    getchar();
-    while (x.Chave != 0)
-    {
-        Retira(x.Chave, &Arvore);
-        Imprime(Arvore);
-        printf("Chave: ");
-        scanf("%ld%*[^\n]", &x.Chave);
-        getchar();
-    }
+
+    CarregaDados(file, Arvore);
     return 0;
 }
