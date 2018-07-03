@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC0A264620EAAFC700DF5E03 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = EC0A264220EAAFC700DF5E03 /* file.c */; };
+		EC0A264A20EAEDF600DF5E03 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = EC0A264920EAEDF600DF5E03 /* Makefile */; };
 		EC5AECA420D000FE00ADC403 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EC5AECA320D000FE00ADC403 /* main.c */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EC0A263F20EAAFC600DF5E03 /* teste.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = teste.txt; sourceTree = "<group>"; };
+		EC0A264020EAAFC600DF5E03 /* arvoreb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = arvoreb; sourceTree = "<group>"; };
+		EC0A264120EAAFC600DF5E03 /* file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file.h; sourceTree = "<group>"; };
+		EC0A264220EAAFC700DF5E03 /* file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = file.c; sourceTree = "<group>"; };
+		EC0A264320EAAFC700DF5E03 /* layout.glade */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = layout.glade; sourceTree = "<group>"; };
+		EC0A264420EAAFC700DF5E03 /* random.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = random.txt; sourceTree = "<group>"; };
+		EC0A264520EAAFC700DF5E03 /* treeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = treeIcon.png; sourceTree = "<group>"; };
+		EC0A264720EAB5D500DF5E03 /* projeto.glade */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = projeto.glade; sourceTree = "<group>"; };
+		EC0A264820EAB5D500DF5E03 /* projeto2.glade */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = projeto2.glade; sourceTree = "<group>"; };
+		EC0A264920EAEDF600DF5E03 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		EC5AECA020D000FE00ADC403 /* aeds2-tp3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "aeds2-tp3"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC5AECA320D000FE00ADC403 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +69,16 @@
 		EC5AECA220D000FE00ADC403 /* aeds2-tp3 */ = {
 			isa = PBXGroup;
 			children = (
+				EC0A264920EAEDF600DF5E03 /* Makefile */,
+				EC0A264720EAB5D500DF5E03 /* projeto.glade */,
+				EC0A264820EAB5D500DF5E03 /* projeto2.glade */,
+				EC0A264020EAAFC600DF5E03 /* arvoreb */,
+				EC0A264220EAAFC700DF5E03 /* file.c */,
+				EC0A264120EAAFC600DF5E03 /* file.h */,
+				EC0A264320EAAFC700DF5E03 /* layout.glade */,
+				EC0A264420EAAFC700DF5E03 /* random.txt */,
+				EC0A263F20EAAFC600DF5E03 /* teste.txt */,
+				EC0A264520EAAFC700DF5E03 /* treeIcon.png */,
 				EC5AECA320D000FE00ADC403 /* main.c */,
 			);
 			path = "aeds2-tp3";
@@ -135,7 +157,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC0A264A20EAEDF600DF5E03 /* Makefile in Sources */,
 				EC5AECA420D000FE00ADC403 /* main.c in Sources */,
+				EC0A264620EAAFC700DF5E03 /* file.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

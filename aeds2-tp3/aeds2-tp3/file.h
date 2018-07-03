@@ -15,6 +15,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-int CarregaDados(char *fileName, TipoPagina *arvore);
+int CarregaDados(char *fileName, TipoPagina *arvore, char* msg);
 
 #endif /* file_h */

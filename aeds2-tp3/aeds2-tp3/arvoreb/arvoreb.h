@@ -11,8 +11,13 @@
 
 #define M 2
 #define MM (M * 2)
-#define FALSE 0
-#define TRUE 1
+
+#ifndef FALSE
+    #define FALSE 0
+#endif
+#ifndef TRUE
+    #define TRUE 1
+#endif
 
 typedef long TipoChave;
 typedef struct TipoRegistro

@@ -14,20 +14,17 @@
  * @param  *arvore: nó raiz da árvore
  * @retval 1
  */
-int CarregaDados(char *fileName, TipoPagina *arvore)
-{
+int CarregaDados(char *fileName, TipoPagina *arvore, char* msg) {
     int numero = 0;
     FILE *loadedFile = NULL; // Arquivo TXT lido
     loadedFile = fopen(fileName, "r");
 
-    if (loadedFile == NULL)
-    {
-        printf("O arquivo %s nao existe. Encerrando a execucao. \n", fileName);
+    if (loadedFile == NULL) {
+        sprintf(msg, "O arquivo %s nao existe ou nao pode ser lido corretamente.", fileName);
         return 0;
     }
 
-    while (1)
-    {
+    while (1) {
         fscanf(loadedFile, "%d", &numero);
         if (fgetc(loadedFile) == EOF)
             break;
@@ -37,8 +34,7 @@ int CarregaDados(char *fileName, TipoPagina *arvore)
         Insere(registro, &arvore);
     }
 
-    Imprime(arvore);
-
     fclose(loadedFile);
+    sprintf(msg, "Arquivo carregado com sucesso!");
     return 1;
 }
