@@ -75,7 +75,7 @@ void on_loadTreeButton_clicked () {
     sprintf(message, "Carregando arvore...");
     appendToLog(message);
     
-    if (CarregaDados(filePath, Arvore, message)) {
+    if (CarregaDados(filePath, &Arvore, message)) {
         gtk_widget_set_sensitive(fileChooserWidget, 0);
         gtk_widget_set_sensitive(fileLoadButtonWidget, 0);
         gtk_widget_set_tooltip_text(fileChooserWidget, disableMessage);
