@@ -30,14 +30,14 @@ typedef struct TipoPagina
 } TipoPagina;
 
 void Inicializa(TipoApontador *Dicionario);
-void Pesquisa(TipoRegistro *x, TipoApontador Ap);
-void InsereNaPagina(TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir);
-void Ins(TipoRegistro Reg, TipoApontador Ap, short *Cresceu, TipoRegistro *RegRetorno, TipoApontador *ApRetorno);
-void Insere(TipoRegistro Reg, TipoApontador *Ap);
-void Reconstitui(TipoApontador ApPag, TipoApontador ApPai, int PosPai, short *Diminuiu);
-void Antecessor(TipoApontador Ap, int Ind, TipoApontador ApPai, short *Diminuiu);
-void Ret(TipoChave Ch, TipoApontador *Ap, short *Diminuiu);
-void Retira(TipoChave Ch, TipoApontador *Ap);
+int Pesquisa(TipoRegistro *x, TipoApontador Ap, int *qntdComparacoes, char *msg);
+void InsereNaPagina(TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir, int *qntdComparacoes);
+void Ins(TipoRegistro Reg, TipoApontador Ap, short *Cresceu, TipoRegistro *RegRetorno, TipoApontador *ApRetorno, int *qntdComparacoes);
+int Insere(TipoRegistro Reg, TipoApontador *Ap, int *qntdComparacoes, char *msg);
+void Reconstitui(TipoApontador ApPag, TipoApontador ApPai, int PosPai, short *Diminuiu, int *qntdComparacoes);
+void Antecessor(TipoApontador Ap, int Ind, TipoApontador ApPai, short *Diminuiu, int *qntdComparacoes);
+void Ret(TipoChave Ch, TipoApontador *Ap, short *Diminuiu, int *qntdComparacoes);
+int Retira(TipoChave Ch, TipoApontador *Ap, int *qntdComparacoes, char *msg);
 void ImprimeI(TipoApontador p, int nivel);
 void Imprime(TipoApontador p);
 void TestaI(TipoApontador p, int pai, short direita);

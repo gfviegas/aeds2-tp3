@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1530569462 source:c:\users\paulo\desktop\aeds2-tp3\aeds2-tp3\aeds2-tp3\arvoreb\arvoreb.c
+	"arvoreb.h"
+	<stddef.h>
+
+1530576963 c:\users\paulo\desktop\aeds2-tp3\aeds2-tp3\aeds2-tp3\arvoreb\arvoreb.h
+	<stdlib.h>
+	<stdio.h>
+
+1530569462 source:c:\users\paulo\desktop\aeds2-tp3\aeds2-tp3\aeds2-tp3\file.c
+	"file.h"
+
+1530569462 c:\users\paulo\desktop\aeds2-tp3\aeds2-tp3\aeds2-tp3\file.h
+	"arvoreb/arvoreb.h"
+	<ctype.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
+1530569462 source:c:\users\paulo\desktop\aeds2-tp3\aeds2-tp3\aeds2-tp3\main.c
+	<stdlib.h>
+	<stdio.h>
+	"file.h"
+
