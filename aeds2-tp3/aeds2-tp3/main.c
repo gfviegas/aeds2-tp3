@@ -13,7 +13,7 @@
 #include "file.h"
 
 #define MAX_FILE_NAME 100
-#define BUFFER_SIZE 280
+#define BUFFER_SIZE 400
 
 GtkLabel        *outputLabel;
 GtkBuilder      *builder;
@@ -22,7 +22,7 @@ GtkFileChooser  *fileChooser;
 GtkEntry        *valueInput;
 GtkTextView     *outputLog;
 
-TipoPagina *Arvore;
+TipoApontador Arvore;
 
 int main(int argc, char *argv[]) {
     setvbuf(stdout, NULL, _IONBF, 0);
@@ -72,7 +72,7 @@ void on_loadTreeButton_clicked () {
     
     strcpy(disableMessage, "So se pode carregar o arquivo uma vez. Rode o programa novamente se quiser carregar outro arquivo.");
     
-    sprintf(message, "Carregando árvore...");
+    sprintf(message, "Carregando arvore...");
     appendToLog(message);
     
     if (CarregaDados(filePath, Arvore, message)) {
@@ -92,25 +92,38 @@ int getInputValue() {
 }
 
 void on_searchButton_clicked() {
+    char message[BUFFER_SIZE];
+    int comparisons = 0;
     int value = getInputValue();
     TipoRegistro target;
     target.Chave = value;
     
-    Pesquisa(&target, Arvore);
+    Pesquisa(&target, Arvore, &comparisons, message);
+    
+    appendToLog(message);
 }
 
 void on_insertButton_clicked() {
+    char message[BUFFER_SIZE];
+    int comparisons = 0;
     int value = getInputValue();
     
     TipoRegistro target;
     target.Chave = value;
     
-    Insere(target, &Arvore);
+    Insere(target, &Arvore, &comparisons, message);
+    
+    appendToLog(message);
 }
 
 void on_removeButton_clicked() {
+    char message[BUFFER_SIZE];
+    int comparisons = 0;
     int value = getInputValue();
-    Retira(value, &Arvore);
+    
+    Retira(value, &Arvore, &comparisons, message);
+    
+    appendToLog(message);
 }
 
 void on_clearButton_clicked() {
@@ -118,7 +131,12 @@ void on_clearButton_clicked() {
 }
 
 void on_heightButton_clicked() {
+    char message[BUFFER_SIZE];
+    int comparisons = 0;
     
+    Altura(&Arvore, &comparisons, message);
+    
+    appendToLog(message);
 }
 
 /*int oldMain()

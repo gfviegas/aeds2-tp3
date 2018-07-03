@@ -16,6 +16,7 @@
  */
 int CarregaDados(char *fileName, TipoPagina *arvore, char* msg) {
     int numero = 0;
+    int comparisons = 0;
     FILE *loadedFile = NULL; // Arquivo TXT lido
     loadedFile = fopen(fileName, "r");
 
@@ -29,9 +30,10 @@ int CarregaDados(char *fileName, TipoPagina *arvore, char* msg) {
         if (fgetc(loadedFile) == EOF)
             break;
 
+        printf("%d, ", numero);
         TipoRegistro registro;
         registro.Chave = numero;
-        Insere(registro, &arvore);
+        Insere(registro, &arvore, &comparisons, msg);
     }
 
     fclose(loadedFile);

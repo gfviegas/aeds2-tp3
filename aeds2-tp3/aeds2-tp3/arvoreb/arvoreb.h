@@ -47,3 +47,4 @@ void ImprimeI(TipoApontador p, int nivel);
 void Imprime(TipoApontador p);
 void TestaI(TipoApontador p, int pai, short direita);
 void Testa(TipoApontador p);
+void Altura(TipoApontador *Ap, int *qntdComparacoes, char *msg);

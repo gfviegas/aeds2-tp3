@@ -14,8 +14,7 @@
  * @param  *Dicionario: nó inicial da árvore
  * @retval None
  */
-void Inicializa(TipoApontador *Dicionario)
-{
+void Inicializa(TipoApontador *Dicionario) {
     *Dicionario = NULL;
 }
 
@@ -25,35 +24,42 @@ void Inicializa(TipoApontador *Dicionario)
  * @param  Ap: apontador do nó
  * @retval 1 se a chave foi encontrada e 0 se não foi
  */
-int Pesquisa(TipoRegistro *x, TipoApontador Ap, int *qntdComparacoes, char *msg)
-{
+int Pesquisa(TipoRegistro *x, TipoApontador Ap, int *qntdComparacoes, char *msg) {
     int cond;
     long i = 1;
-    qntdComparacoes++;
-    if (Ap == NULL)
-    {
+    
+    (*qntdComparacoes)++;
+    if (Ap == NULL) {
+        sprintf(msg, "Registro %ld nao encontrado! Arvore nula! %d comparacoes foram feitas", x->Chave, *qntdComparacoes);
         return 0;
     }
+
     while (i < Ap->n && x->Chave > Ap->r[i - 1].Chave){
         i++;
-        qntdComparacoes++;
+        (*qntdComparacoes)++;
     }
-    qntdComparacoes++;
-    if (x->Chave == Ap->r[i - 1].Chave)
-    {
+    
+    (*qntdComparacoes)++;
+    if (x->Chave == Ap->r[i - 1].Chave) {
         *x = Ap->r[i - 1];
+        sprintf(msg, "Registro %ld encontrado! %d comparacoes foram feitas", x->Chave, *qntdComparacoes);
         return 1;
     }
-    qntdComparacoes++;
-    if (x->Chave < Ap->r[i - 1].Chave){
+    
+    (*qntdComparacoes)++;
+    if (x->Chave < Ap->r[i - 1].Chave)
         cond = Pesquisa(x, Ap->p[i - 1],qntdComparacoes, msg);
-    }
     else
         cond = Pesquisa(x, Ap->p[i],qntdComparacoes, msg);
-    if(cond)
-        sprintf(msg,"Registro %ld encontrado!%d comparações foram feitas", x->Chave, qntdComparacoes);
-    else
-        sprintf(msg, "Registro %ld não encontrado!%d comparações foram feitas", x->Chave, qntdComparacoes);
+    
+    (*qntdComparacoes)++;
+    if (cond) {
+        sprintf(msg, "Registro %ld encontrado! %d comparacoes foram feitas", x->Chave, *qntdComparacoes);
+        return 1;
+    }
+    
+    sprintf(msg, "Registro %ld nao encontrado! %d comparacoes foram feitas", x->Chave, *qntdComparacoes);
+    return 0;
 }
 
 /**
@@ -63,28 +69,29 @@ int Pesquisa(TipoRegistro *x, TipoApontador Ap, int *qntdComparacoes, char *msg)
  * @param  ApDir: nó da direita
  * @retval None
  */
-void InsereNaPagina(TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir, int *qntdComparacoes)
-{
+void InsereNaPagina(TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir, int *qntdComparacoes) {
     short NaoAchouPosicao;
     int k;
     k = Ap->n;
     NaoAchouPosicao = (k > 0);
-    while (NaoAchouPosicao)
-    {
-        qntdComparacoes = qntdComparacoes + 2;
-        if (Reg.Chave >= Ap->r[k - 1].Chave)
-        {
+    
+    (*qntdComparacoes)++;
+    while (NaoAchouPosicao) {
+        (*qntdComparacoes) += 2;
+        if (Reg.Chave >= Ap->r[k - 1].Chave) {
             NaoAchouPosicao = FALSE;
             break;
         }
+        
         Ap->r[k] = Ap->r[k - 1];
         Ap->p[k + 1] = Ap->p[k];
         k--;
-        qntdComparacoes++;
-        if (k < 1){
+        
+        (*qntdComparacoes)++;
+        if (k < 1)
             NaoAchouPosicao = FALSE;
-        }
     }
+    
     Ap->r[k] = Reg;
     Ap->p[k + 1] = ApDir;
     Ap->n++;
@@ -99,63 +106,68 @@ void InsereNaPagina(TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir, int
  * @param  *ApRetorno: nó a ser retornado
  * @retval None
  */
-void Ins(TipoRegistro Reg, TipoApontador Ap, short *Cresceu, TipoRegistro *RegRetorno, TipoApontador *ApRetorno, int *qntdComparacoes)
-{
+void Ins(TipoRegistro Reg, TipoApontador Ap, short *Cresceu, TipoRegistro *RegRetorno, TipoApontador *ApRetorno, int *qntdComparacoes) {
     long i = 1;
     long j;
     TipoApontador ApTemp;
-    qntdComparacoes++;
-    if (Ap == NULL)
-    {
+    
+    (*qntdComparacoes)++;
+    if (Ap == NULL) {
         *Cresceu = TRUE;
         (*RegRetorno) = Reg;
         (*ApRetorno) = NULL;
          return;
     }
+    
+    (*qntdComparacoes)++;
     while (i < Ap->n && Reg.Chave > Ap->r[i - 1].Chave){
         i++;
-        qntdComparacoes++;
+        (*qntdComparacoes)++;
     }
-    qntdComparacoes++;
-    if (Reg.Chave == Ap->r[i - 1].Chave)
-    {
+    
+    
+    if (Reg.Chave == Ap->r[i - 1].Chave) {
         printf(" Erro: Registro ja esta presente\n");
         *Cresceu = FALSE;
         return;
     }
-    qntdComparacoes++;
-    if (Reg.Chave < Ap->r[i - 1].Chave){
+    
+    (*qntdComparacoes)++;
+    if (Reg.Chave < Ap->r[i - 1].Chave)
         i--;
-    }
+    
     Ins(Reg, Ap->p[i], Cresceu, RegRetorno, ApRetorno, qntdComparacoes);
-    qntdComparacoes++;
-    if (!*Cresceu){
-        return;
-    }
-    qntdComparacoes++;
-    if (Ap->n < MM) /* Pagina tem espaco */
-    {
+    
+    (*qntdComparacoes)++;
+    if (!*Cresceu) return;
+    
+    (*qntdComparacoes)++;
+    if (Ap->n < MM) { // Pagina tem espaco
         InsereNaPagina(Ap, *RegRetorno, *ApRetorno,qntdComparacoes);
         *Cresceu = FALSE;
         return;
     }
-    /* Overflow: Pagina tem que ser dividida */
+    
+    // Overflow: Pagina tem que ser dividida
     ApTemp = (TipoApontador)malloc(sizeof(TipoPagina));
     ApTemp->n = 0;
     ApTemp->p[0] = NULL;
-    qntdComparacoes++;
-    if (i < M + 1)
-    {
+    
+    (*qntdComparacoes)++;
+    if (i < M + 1) {
         InsereNaPagina(ApTemp, Ap->r[MM - 1], Ap->p[MM], qntdComparacoes);
         Ap->n--;
         InsereNaPagina(Ap, *RegRetorno, *ApRetorno, qntdComparacoes);
-    }
-    else
+    } else {
         InsereNaPagina(ApTemp, *RegRetorno, *ApRetorno, qntdComparacoes);
+    }
+    
+    (*qntdComparacoes)++;
     for (j = M + 2; j <= MM; j++){
-        qntdComparacoes++;
+        (*qntdComparacoes)++;
         InsereNaPagina(ApTemp, Ap->r[j - 1], Ap->p[j], qntdComparacoes);
     }
+    
     Ap->n = M;
     ApTemp->p[0] = Ap->p[M + 1];
     *RegRetorno = Ap->r[M];
@@ -168,29 +180,27 @@ void Ins(TipoRegistro Reg, TipoApontador Ap, short *Cresceu, TipoRegistro *RegRe
  * @param  *Ap: nó pai da árvore
  * @retval 1 se inseriu e 0 se já havia o registro na árvore
  */
-int Insere(TipoRegistro Reg, TipoApontador *Ap, int *qntdComparacoes,char *msg){
-    int qntdComparacoes2=0;
+int Insere(TipoRegistro Reg, TipoApontador *Ap, int *qntdComparacoes, char *msg){
     short Cresceu;
     TipoRegistro RegRetorno;
     TipoPagina *ApRetorno, *ApTemp;
-    qntdComparacoes++;
-    if(Pesquisa(&Reg,*Ap,&qntdComparacoes2,msg)){
-        sprintf(msg, "Registro %ld já está na árvore!%d comparações foram feitas", Reg.Chave, qntdComparacoes2);
-        return 0;// registro já está na arvore
-    }
-    else{
+    (*qntdComparacoes)++;
+    if (Pesquisa(&Reg, *Ap, qntdComparacoes, msg)) {
+        sprintf(msg, "Registro %ld ja esta na arvore! %d comparacoes foram feitas", Reg.Chave, *qntdComparacoes);
+        return 0;// Registro já está na arvore
+    } else {
         Ins(Reg, *Ap, &Cresceu, &RegRetorno, &ApRetorno, qntdComparacoes);
-        if (Cresceu) /* Arvore cresce na altura pela raiz */
-        {
+        
+        (*qntdComparacoes)++;
+        if (Cresceu) { // Arvore cresce na altura pela raiz
             ApTemp = (TipoPagina *)malloc(sizeof(TipoPagina));
             ApTemp->n = 1;
             ApTemp->r[0] = RegRetorno;
             ApTemp->p[1] = ApRetorno;
             ApTemp->p[0] = *Ap;
             *Ap = ApTemp;
-            qntdComparacoes++;
         }
-        sprintf(msg, "Registro %ld inserido com sucesso!%d comparações foram feitas", Reg.Chave, qntdComparacoes);
+        sprintf(msg, "Registro %ld inserido com sucesso! %d comparacoes foram feitas", Reg.Chave, *qntdComparacoes);
         return 1;
         }
 }
@@ -203,91 +213,92 @@ int Insere(TipoRegistro Reg, TipoApontador *Ap, int *qntdComparacoes,char *msg){
  * @param  *Diminuiu: booleano que define se página diminuiu ou não
  * @retval None
  */
-void Reconstitui(TipoApontador ApPag, TipoApontador ApPai, int PosPai, short *Diminuiu, int *qntdComparacoes)
-{
+void Reconstitui(TipoApontador ApPag, TipoApontador ApPai, int PosPai, short *Diminuiu, int *qntdComparacoes) {
     TipoPagina *Aux;
     long DispAux, j;
-    qntdComparacoes++;
-    if (PosPai < ApPai->n) /* Aux = TipoPagina a direita de ApPag */
-    {
+    
+    (*qntdComparacoes)++;
+    if (PosPai < ApPai->n) { // Aux = TipoPagina a direita de ApPag
         Aux = ApPai->p[PosPai + 1];
         DispAux = (Aux->n - M + 1) / 2;
         ApPag->r[ApPag->n] = ApPai->r[PosPai];
         ApPag->p[ApPag->n + 1] = Aux->p[0];
         ApPag->n++;
-        qntdComparacoes++;
-        if (DispAux > 0) /* Existe folga: transfere de Aux para ApPag */
-        {
+        
+        (*qntdComparacoes)++;
+        if (DispAux > 0) { // Existe folga: transfere de Aux para ApPag
+            (*qntdComparacoes)++;
             for (j = 1; j < DispAux; j++){
-                InsereNaPagina(ApPag, Aux->r[j - 1], Aux->p[j],qntdComparacoes);
-                qntdComparacoes++;
+                InsereNaPagina(ApPag, Aux->r[j - 1], Aux->p[j], qntdComparacoes);
+                (*qntdComparacoes)++;
             }
+            
             ApPai->r[PosPai] = Aux->r[DispAux - 1];
             Aux->n -= DispAux;
+
             for (j = 0; j < Aux->n; j++){
-                qntdComparacoes++;
+                (*qntdComparacoes)++;
                 Aux->r[j] = Aux->r[j + DispAux];
             }
+            
             for (j = 0; j <= Aux->n; j++){
-                qntdComparacoes++;
+                (*qntdComparacoes)++;
                 Aux->p[j] = Aux->p[j + DispAux];
             }
+
             *Diminuiu = FALSE;
-        }
-        else /* Fusao: intercala Aux em ApPag e libera Aux */
-        {
+        } else {
+            // Fusao: intercala Aux em ApPag e libera Aux */
             for (j = 1; j <= M; j++){
-                qntdComparacoes++;
-                InsereNaPagina(ApPag, Aux->r[j - 1], Aux->p[j],qntdComparacoes);
+                (*qntdComparacoes)++;
+                InsereNaPagina(ApPag, Aux->r[j - 1], Aux->p[j], qntdComparacoes);
             }
             free(Aux);
-            for (j = PosPai + 1; j < ApPai->n; j++)
-            {
+            for (j = PosPai + 1; j < ApPai->n; j++) {
                 ApPai->r[j - 1] = ApPai->r[j];
                 ApPai->p[j] = ApPai->p[j + 1];
-                qntdComparacoes++;
+                (*qntdComparacoes)++;
             }
             ApPai->n--;
-            qntdComparacoes++;
+            (*qntdComparacoes)++;
             if (ApPai->n >= M)
                 *Diminuiu = FALSE;
         }
-    }
-    else /* Aux = TipoPagina a esquerda de ApPag */
-    {
+    } else {
+        // Aux = TipoPagina a esquerda de ApPag
         Aux = ApPai->p[PosPai - 1];
         DispAux = (Aux->n - M + 1) / 2;
         for (j = ApPag->n; j >= 1; j--){
             ApPag->r[j] = ApPag->r[j - 1];
-            qntdComparacoes++;
+            (*qntdComparacoes)++;
         }
         ApPag->r[0] = ApPai->r[PosPai - 1];
         for (j = ApPag->n; j >= 0; j--){
             ApPag->p[j + 1] = ApPag->p[j];
-            qntdComparacoes++;
+            (*qntdComparacoes)++;
         }
         ApPag->n++;
-        qntdComparacoes++;
-        if (DispAux > 0) /* Existe folga: transf. de Aux para ApPag */
-        {
+        (*qntdComparacoes)++;
+        if (DispAux > 0) { // Existe folga: transf. de Aux para ApPag */
             for (j = 1; j < DispAux; j++){
-                InsereNaPagina(ApPag, Aux->r[Aux->n - j], Aux->p[Aux->n - j + 1],qntdComparacoes);
-                qntdComparacoes++;
+                InsereNaPagina(ApPag, Aux->r[Aux->n - j], Aux->p[Aux->n - j + 1], qntdComparacoes);
+                (*qntdComparacoes)++;
             }
             ApPag->p[0] = Aux->p[Aux->n - DispAux + 1];
             ApPai->r[PosPai - 1] = Aux->r[Aux->n - DispAux];
             Aux->n -= DispAux;
             *Diminuiu = FALSE;
-        }
-        else /* Fusao: intercala ApPag em Aux e libera ApPag */
-        {
+        } else {
+            // Fusao: intercala ApPag em Aux e libera ApPag */
             for (j = 1; j <= M; j++){
                 InsereNaPagina(Aux, ApPag->r[j - 1], ApPag->p[j],qntdComparacoes);
-                qntdComparacoes++;
+                (*qntdComparacoes)++;
             }
+
             free(ApPag);
             ApPai->n--;
-            qntdComparacoes++;
+
+            (*qntdComparacoes)++;
             if (ApPai->n >= M)
                 *Diminuiu = FALSE;
         }
@@ -302,15 +313,14 @@ void Reconstitui(TipoApontador ApPag, TipoApontador ApPai, int PosPai, short *Di
  * @param  *Diminuiu: booleano que define se página diminuiu ou não
  * @retval None
  */
-void Antecessor(TipoApontador Ap, int Ind, TipoApontador ApPai, short *Diminuiu, int *qntdComparacoes)
-{
-    qntdComparacoes++;
-    if (ApPai->p[ApPai->n] != NULL)
-    {
+void Antecessor(TipoApontador Ap, int Ind, TipoApontador ApPai, short *Diminuiu, int *qntdComparacoes) {
+    (*qntdComparacoes)++;
+    if (ApPai->p[ApPai->n] != NULL) {
         Antecessor(Ap, Ind, ApPai->p[ApPai->n], Diminuiu, qntdComparacoes);
+        (*qntdComparacoes)++;
         if (*Diminuiu)
             Reconstitui(ApPai->p[ApPai->n], ApPai, (long)ApPai->n, Diminuiu, qntdComparacoes);
-        qntdComparacoes++;
+
         return;
     }
     Ap->r[Ind - 1] = ApPai->r[ApPai->n - 1];
@@ -325,54 +335,62 @@ void Antecessor(TipoApontador Ap, int Ind, TipoApontador ApPai, short *Diminuiu,
  * @param  *Diminuiu: booleano que define se página diminuiu ou não
  * @retval None
  */
-void Ret(TipoChave Ch, TipoApontador *Ap, short *Diminuiu,int *qntdComparacoes)
-{
+void Ret(TipoChave Ch, TipoApontador *Ap, short *Diminuiu, int *qntdComparacoes) {
     long j, Ind = 1;
     TipoApontador Pag;
-    qntdComparacoes++;
-    if (*Ap == NULL)
-    {
+    
+    (*qntdComparacoes)++;
+    if (*Ap == NULL) {
         printf("Erro: registro nao esta na arvore\n");
         *Diminuiu = FALSE;
         return;
     }
+    
     Pag = *Ap;
-    while (Ind < Pag->n && Ch > Pag->r[Ind - 1].Chave){
+    
+    (*qntdComparacoes)++;
+    while (Ind < Pag->n && Ch > Pag->r[Ind - 1].Chave) {
         Ind++;
-        qntdComparacoes++;
+        (*qntdComparacoes)++;
     }
-    qntdComparacoes++;
-    if (Ch == Pag->r[Ind - 1].Chave)
-    {
-        qntdComparacoes++;
-        if (Pag->p[Ind - 1] == NULL) /* TipoPagina folha */
-        {
+    
+    if (Ch == Pag->r[Ind - 1].Chave) {
+        
+        (*qntdComparacoes)++;
+        if (Pag->p[Ind - 1] == NULL) {  /* TipoPagina folha */
             Pag->n--;
             *Diminuiu = (Pag->n < M);
-            for (j = Ind; j <= Pag->n; j++)
-            {
-                qntdComparacoes++;
+            
+            (*qntdComparacoes)++;
+            for (j = Ind; j <= Pag->n; j++) {
                 Pag->r[j - 1] = Pag->r[j];
                 Pag->p[j] = Pag->p[j + 1];
+                (*qntdComparacoes)++;
             }
+            
+            (*qntdComparacoes)--;
             return;
         }
         /* TipoPagina nao e folha: trocar com antecessor */
         Antecessor(*Ap, Ind, Pag->p[Ind - 1], Diminuiu, qntdComparacoes);
-        qntdComparacoes++;
-        if (*Diminuiu){
+        (*qntdComparacoes)++;
+        if (*Diminuiu) {
             Reconstitui(Pag->p[Ind - 1], *Ap, Ind - 1, Diminuiu, qntdComparacoes);
         }
+        
         return;
     }
-    qntdComparacoes++;
+
+    (*qntdComparacoes)++;
     if (Ch > Pag->r[Ind - 1].Chave){
         Ind++;
     }
-    Ret(Ch, &Pag->p[Ind - 1], Diminuiu,qntdComparacoes);
-    qntdComparacoes++;
-    if (*Diminuiu){
-        Reconstitui(Pag->p[Ind - 1], *Ap, Ind - 1, Diminuiu,qntdComparacoes);
+
+    Ret(Ch, &Pag->p[Ind - 1], Diminuiu, qntdComparacoes);
+    
+    (*qntdComparacoes)++;
+    if (*Diminuiu) {
+        Reconstitui(Pag->p[Ind - 1], *Ap, Ind - 1, Diminuiu, qntdComparacoes);
     }
 }
 
@@ -382,29 +400,28 @@ void Ret(TipoChave Ch, TipoApontador *Ap, short *Diminuiu,int *qntdComparacoes)
  * @param  *Ap: nó raiz da árvore
  * @retval 1 se a chave foi retirada e 0 se não havia a chave na árvore
  */
-int Retira(TipoChave Ch, TipoApontador *Ap, int *qntdComparacoes, char *msg)
-{
-    int qntdComparacoes2=0;
+int Retira(TipoChave Ch, TipoApontador *Ap, int *qntdComparacoes, char *msg) {
     TipoRegistro x;
     x.Chave = Ch;
-    qntdComparacoes++;
-    if(Pesquisa(&x, *Ap,&qntdComparacoes2,msg)){
+    
+    (*qntdComparacoes)++;
+    if (Pesquisa(&x, *Ap, qntdComparacoes, msg)) {
         short Diminuiu;
         TipoApontador Aux;
-        Ret(Ch, Ap, &Diminuiu,qntdComparacoes);
-        qntdComparacoes++;
-        if (Diminuiu && (*Ap)->n == 0) /* Arvore diminui na altura */
-        {
+        Ret(Ch, Ap, &Diminuiu, qntdComparacoes);
+        
+        (*qntdComparacoes)++;
+        if (Diminuiu && (*Ap)->n == 0) {  // Arvore diminui na altura
             Aux = *Ap;
             *Ap = Aux->p[0];
             free(Aux);
         }
-        sprintf(msg,"Registro %ld retirado com sucesso! %d comparações foram feitas", Ch, qntdComparacoes);
+        
+        sprintf(msg,"Registro %ld retirado com sucesso! %d comparacoes foram feitas", Ch, *qntdComparacoes);
         return 1;
     }
-    else
-        sprintf(msg,"Registro %ld não foi encontrado na árvore! %d comparações foram feitas", Ch, qntdComparacoes2);
-        return 0; //Não existe tal chave na arvore
+    sprintf(msg, "Registro %ld nao foi encontrado na arvore! %d comparacoes foram feitas", Ch, *qntdComparacoes);
+    return 0; //Não existe tal chave na arvore
 }
 
 /**
@@ -413,8 +430,7 @@ int Retira(TipoChave Ch, TipoApontador *Ap, int *qntdComparacoes, char *msg)
  * @param  nivel: nível onde ele se encontra
  * @retval None
  */
-void ImprimeI(TipoApontador p, int nivel)
-{
+void ImprimeI(TipoApontador p, int nivel) {
     long i;
     if (p == NULL)
         return;
@@ -432,8 +448,7 @@ void ImprimeI(TipoApontador p, int nivel)
  * @param  p: raiz da árvore
  * @retval None
  */
-void Imprime(TipoApontador p)
-{
+void Imprime(TipoApontador p) {
     int n = 0;
     ImprimeI(p, n);
 }
@@ -445,21 +460,17 @@ void Imprime(TipoApontador p)
  * @param  direita: página a direita
  * @retval None
  */
-void TestaI(TipoApontador p, int pai, short direita)
-{
+void TestaI(TipoApontador p, int pai, short direita) {
     int i;
     int antecessor = 0;
     if (p == NULL)
         return;
-    if (p->r[0].Chave > pai && direita == FALSE)
-    {
+    if (p->r[0].Chave > pai && direita == FALSE) {
         printf("Erro: filho %12ld maior que pai %d\n", p->r[0].Chave, pai);
         return;
     }
-    for (i = 0; i < p->n; i++)
-    {
-        if (p->r[i].Chave <= antecessor)
-        {
+    for (i = 0; i < p->n; i++) {
+        if (p->r[i].Chave <= antecessor) {
             printf("Erro: irmao %ld maior que irmao a esquerda %d\n",
                    (long)p->r[i].Chave, antecessor);
             return;
@@ -476,12 +487,17 @@ void TestaI(TipoApontador p, int pai, short direita)
  * @param  p: nó raiz da árvore
  * @retval None
  */
-void Testa(TipoApontador p)
-{
+void Testa(TipoApontador p) {
     int i;
     if (p == NULL)
         return;
     for (i = 0; i < p->n; i++)
         TestaI(p->p[i], p->r[i].Chave, FALSE);
     TestaI(p->p[p->n], p->r[i].Chave, TRUE);
+}
+
+void Altura(TipoApontador *Ap, int *qntdComparacoes, char *msg) {
+    int height = 0;
+    sprintf(msg, "A altura da arvore e %d", height);
+    return;
 }
