@@ -1,0 +1,375 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="mainWindow">
+    <property name="width_request">640</property>
+    <property name="height_request">480</property>
+    <property name="visible">True</property>
+    <property name="title" translatable="yes">B-Tree Manipulator</property>
+    <property name="resizable">False</property>
+    <property name="window_position">center</property>
+    <property name="default_width">640</property>
+    <property name="default_height">480</property>
+    <property name="icon">treeIcon.png</property>
+    <property name="icon_name">applications-internet</property>
+    <signal name="destroy_event" handler="on_mainWindow_destroy_event"/>
+    <child>
+      <object class="GtkLayout" id="layout">
+        <property name="visible">True</property>
+        <property name="width">640</property>
+        <property name="height">480</property>
+        <child>
+            <object class="GtkImage" id="background">
+                <property name="width_request">640</property>
+                <property name="height_request">480</property>
+                <property name="visible">True</property>
+                <property name="pixbuf">background-50.png</property>
+            </object>
+        </child>
+        <child>
+          <object class="GtkHSeparator" id="hseparator1">
+            <property name="width_request">620</property>
+            <property name="height_request">10</property>
+            <property name="visible">True</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">70</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="title">
+            <property name="width_request">640</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="xpad">1</property>
+            <property name="label" translatable="yes">B-Tree Manipulator</property>
+            <attributes>
+              <attribute name="weight" value="ultraheavy"/>
+              <attribute name="variant" value="normal"/>
+              <attribute name="gravity" value="south"/>
+              <attribute name="gravity-hint" value="strong"/>
+              <attribute name="foreground" value="#15d93e200000"/>
+              <attribute name="scale" value="2.000000"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="y">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="subtitle">
+            <property name="width_request">640</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="xpad">1</property>
+            <property name="label" translatable="yes">Universidade Federal de Vicosa - Campus Florestal. TP II - CCF212
+Bruno Marra, Gustavo Viegas &amp; Heitor Passeado
+
+</property>
+            <property name="justify">fill</property>
+            <attributes>
+              <attribute name="weight" value="light"/>
+              <attribute name="variant" value="normal"/>
+              <attribute name="gravity" value="south"/>
+              <attribute name="gravity-hint" value="strong"/>
+              <attribute name="foreground" value="#358450e326ab"/>
+              <attribute name="scale" value="1.000000"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="y">35</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFileChooserButton" id="fileChooser">
+            <property name="width_request">150</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="has_tooltip">True</property>
+            <property name="tooltip_text" translatable="yes">Selecione um arquivo...</property>
+            <property name="show_hidden">True</property>
+            <property name="title" translatable="yes">Selecionar Arquivo</property>
+          </object>
+          <packing>
+            <property name="x">50</property>
+            <property name="y">120</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="labelSelectFile">
+            <property name="width_request">150</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Carregar Arquivo</property>
+            <attributes>
+              <attribute name="weight" value="semibold"/>
+              <attribute name="underline" value="True"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">50</property>
+            <property name="y">90</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkVSeparator" id="vseparator1">
+            <property name="width_request">10</property>
+            <property name="height_request">300</property>
+            <property name="visible">True</property>
+            <property name="orientation">vertical</property>
+          </object>
+          <packing>
+            <property name="x">290</property>
+            <property name="y">180</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHSeparator" id="hseparator2">
+            <property name="width_request">620</property>
+            <property name="height_request">10</property>
+            <property name="visible">True</property>
+          </object>
+          <packing>
+            <property name="y">170</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="loadTreeButton">
+            <property name="label" translatable="yes">Carregar Arvore</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="border_width">1</property>
+            <property name="relief">half</property>
+            <signal name="clicked" handler="on_loadTreeButton_clicked"/>
+          </object>
+          <packing>
+            <property name="x">421</property>
+            <property name="y">115</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="valueInput">
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="tooltip_text" translatable="yes">Digite um Valor</property>
+          </object>
+          <packing>
+            <property name="x">20</property>
+            <property name="y">250</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="valueLabel">
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Valor do Registro
+</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">20</property>
+            <property name="y">220</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="searchButton">
+            <property name="label" translatable="yes">Pesquisar</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="image">searchIcon</property>
+            <property name="relief">half</property>
+            <signal name="clicked" handler="on_searchButton_clicked"/>
+          </object>
+          <packing>
+            <property name="x">180</property>
+            <property name="y">190</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="insertButton">
+            <property name="label" translatable="yes">Inserir</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="image">addIcon</property>
+            <property name="relief">half</property>
+            <signal name="clicked" handler="on_insertButton_clicked"/>
+          </object>
+          <packing>
+            <property name="x">180</property>
+            <property name="y">230</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="removeButton">
+            <property name="label" translatable="yes">Excluir</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="image">removeIcon</property>
+            <property name="relief">half</property>
+            <signal name="clicked" handler="on_removeButton_clicked"/>
+          </object>
+          <packing>
+            <property name="x">180</property>
+            <property name="y">270</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="outputLabel">
+            <property name="width_request">320</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Saida do Programa
+</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">310</property>
+            <property name="y">180</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="clearButton">
+            <property name="label" translatable="yes">Limpar</property>
+            <property name="width_request">80</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="has_tooltip">True</property>
+            <property name="tooltip_text" translatable="yes">Limpar Valor do Field</property>
+            <property name="image">clearIcon</property>
+            <property name="xalign">0.54000002145767212</property>
+            <signal name="clicked" handler="on_clearButton_clicked"/>
+          </object>
+          <packing>
+            <property name="x">30</property>
+            <property name="y">292</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrollLog">
+            <property name="width_request">320</property>
+            <property name="height_request">250</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">automatic</property>
+            <child>
+              <object class="GtkTextView" id="output">
+                <property name="width_request">320</property>
+                <property name="height_request">250</property>
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="can_focus">True</property>
+                <property name="events">GDK_STRUCTURE_MASK | GDK_SCROLL_MASK</property>
+                <property name="extension_events">cursor</property>
+                <property name="border_width">2</property>
+                <property name="editable">False</property>
+                <property name="wrap_mode">word</property>
+                <property name="justification">fill</property>
+                <property name="left_margin">8</property>
+                <property name="right_margin">5</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">310</property>
+            <property name="y">210</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="heightButton">
+            <property name="label" translatable="yes">Imprimir Altura da Arvore</property>
+            <property name="width_request">200</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="image">heightIcon</property>
+            <property name="relief">half</property>
+            <signal name="clicked" handler="on_heightButton_clicked"/>
+          </object>
+          <packing>
+            <property name="x">50</property>
+            <property name="y">390</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name N -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">2</col>
+      </row>
+      <row>
+        <col id="0">4</col>
+      </row>
+      <row>
+        <col id="0">8</col>
+      </row>
+      <row>
+        <col id="0">16</col>
+      </row>
+      <row>
+        <col id="0">32</col>
+      </row>
+      <row>
+        <col id="0">64</col>
+      </row>
+      <row>
+        <col id="0">128</col>
+      </row>
+      <row>
+        <col id="0">256</col>
+      </row>
+      <row>
+        <col id="0">512</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkImage" id="searchIcon">
+    <property name="visible">True</property>
+    <property name="stock">gtk-find</property>
+  </object>
+  <object class="GtkImage" id="addIcon">
+    <property name="visible">True</property>
+    <property name="stock">gtk-add</property>
+  </object>
+  <object class="GtkImage" id="removeIcon">
+    <property name="visible">True</property>
+    <property name="stock">gtk-dialog-error</property>
+  </object>
+  <object class="GtkImage" id="clearIcon">
+    <property name="visible">True</property>
+    <property name="stock">gtk-clear</property>
+  </object>
+  <object class="GtkImage" id="heightIcon">
+    <property name="visible">True</property>
+    <property name="icon_name">x-office-spreadsheet</property>
+  </object>
+</interface>
